@@ -1,0 +1,7 @@
+D:\LapTrinhPython\code_farapi\code\clone\demo_api_57kmt\bin\demo_api_57kmt.dll.config
+D:\LapTrinhPython\code_farapi\code\clone\demo_api_57kmt\bin\demo_api_57kmt.dll
+D:\LapTrinhPython\code_farapi\code\clone\demo_api_57kmt\bin\demo_api_57kmt.pdb
+D:\LapTrinhPython\code_farapi\code\clone\demo_api_57kmt\obj\Debug\web_randomdata.csproj.AssemblyReference.cache
+D:\LapTrinhPython\code_farapi\code\clone\demo_api_57kmt\obj\Debug\web_randomdata.csproj.CoreCompileInputs.cache
+D:\LapTrinhPython\code_farapi\code\clone\demo_api_57kmt\obj\Debug\demo_api_57kmt.dll
+D:\LapTrinhPython\code_farapi\code\clone\demo_api_57kmt\obj\Debug\demo_api_57kmt.pdb

@@ -1,0 +1,211 @@
+[
+    {
+        "id": "eb8a7d7865314d20",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "731c7234373b2958",
+        "type": "inject",
+        "z": "eb8a7d7865314d20",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 140,
+        "wires": [
+            [
+                "483f0be883b250af"
+            ]
+        ]
+    },
+    {
+        "id": "483f0be883b250af",
+        "type": "function",
+        "z": "eb8a7d7865314d20",
+        "name": "function 1",
+        "func": "msg.payload= \"SELECT * FROM history;\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 140,
+        "wires": [
+            [
+                "e36d7a7cbdf533cc",
+                "34a9bcfd3522f584"
+            ]
+        ]
+    },
+    {
+        "id": "e36d7a7cbdf533cc",
+        "type": "debug",
+        "z": "eb8a7d7865314d20",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "a5de3b43a8bb9106",
+        "type": "debug",
+        "z": "eb8a7d7865314d20",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "34a9bcfd3522f584",
+        "type": "MSSQL",
+        "z": "eb8a7d7865314d20",
+        "mssqlCN": "a67149f6c2c8ff99",
+        "name": "",
+        "outField": "payload",
+        "returnType": 0,
+        "throwErrors": 1,
+        "query": "",
+        "modeOpt": "queryMode",
+        "modeOptType": "query",
+        "queryOpt": "payload",
+        "queryOptType": "editor",
+        "paramsOpt": "queryParams",
+        "paramsOptType": "none",
+        "rows": "rows",
+        "rowsType": "msg",
+        "parseMustache": true,
+        "params": [],
+        "x": 480,
+        "y": 380,
+        "wires": [
+            [
+                "a5de3b43a8bb9106"
+            ]
+        ]
+    },
+    {
+        "id": "18685823062c9bb9",
+        "type": "inject",
+        "z": "eb8a7d7865314d20",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 400,
+        "wires": [
+            [
+                "c9994a0c672490b4"
+            ]
+        ]
+    },
+    {
+        "id": "c9994a0c672490b4",
+        "type": "http request",
+        "z": "eb8a7d7865314d20",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "persist": false,
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 230,
+        "y": 480,
+        "wires": [
+            [
+                "d7b82d62b9e8c500"
+            ]
+        ]
+    },
+    {
+        "id": "d7b82d62b9e8c500",
+        "type": "function",
+        "z": "eb8a7d7865314d20",
+        "name": "function 2",
+        "func": "var json = JSON.parse(msg.payload);\nif (json.humidity === undefined || json.humidity === null) {\n    throw new Error(\"json.humidity is undefined or null\");\n}\nmsg.payload =` INSERT INTO history(sid, value) VALUES('2', ${ json.humidity })`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 520,
+        "wires": [
+            [
+                "34a9bcfd3522f584"
+            ]
+        ]
+    },
+    {
+        "id": "a67149f6c2c8ff99",
+        "type": "MSSQL-CN",
+        "tdsVersion": "7_4",
+        "name": "VIETDZAI",
+        "server": "127.0.0.1",
+        "port": "1433",
+        "encyption": true,
+        "trustServerCertificate": true,
+        "database": "demo",
+        "useUTC": true,
+        "connectTimeout": "15000",
+        "requestTimeout": "15000",
+        "cancelTimeout": "5000",
+        "pool": "5",
+        "parseJSON": false,
+        "enableArithAbort": true,
+        "readOnlyIntent": false
+    }
+]
